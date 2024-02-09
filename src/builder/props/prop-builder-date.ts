@@ -111,7 +111,7 @@ export class JsfPropBuilderDate extends JsfAbstractPropBuilder<JsfPropDate, JsfH
     if (!date) {
       return null;
     }
-    return date && date.toString();
+    return date && date.toISOString();
   }
 
   jsonToValue(date: string) {
