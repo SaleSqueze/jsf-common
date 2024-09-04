@@ -121,6 +121,8 @@ export interface DataSourceFilterInterface {
 
 export class JsfPageBuilder extends JsfAbstractBuilder {
 
+  static filterDebounceTime = 100;
+
   protected onFilterChange$: Subject<{
     dataSource: string;
     componentPath: string;
@@ -374,7 +376,7 @@ export class JsfPageBuilder extends JsfAbstractBuilder {
   ) {
     prop
       .valueChange
-      .pipe(takeUntil(prop.unsubscribe), takeUntil(this.onDestroy), debounce(() => timer(100)))
+      .pipe(takeUntil(prop.unsubscribe), takeUntil(this.onDestroy), debounce(() => timer(JsfPageBuilder.filterDebounceTime)))
       .subscribe((x) => {
         this.onFilterChange(dataSource, componentPath, filterPath, { groupKey });
       });
